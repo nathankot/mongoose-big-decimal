@@ -90,9 +90,9 @@ describe('Big Decimal Type', function() {
         done();
       });
     });
-    
+
   });
-  
+
 });
 
 
