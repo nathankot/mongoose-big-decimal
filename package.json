@@ -4,7 +4,7 @@
   "description": "Adds the big decimal type to mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "mocha spec"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
     "mocha": "~1.17.1",
     "chai": "~1.8.1",
     "mongoose": "~3.8.5"
+  },
+  "dependencies": {
+    "big.js": "~2.4.1"
   }
 }
