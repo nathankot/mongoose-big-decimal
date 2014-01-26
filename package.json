@@ -1,0 +1,30 @@
+{
+  "name": "mongoose-big-decimal",
+  "version": "0.0.0",
+  "description": "Adds the big decimal type to mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathankot/mongoose-big-decimal.git"
+  },
+  "keywords": [
+    "mongoose",
+    "type",
+    "big",
+    "decimal"
+  ],
+  "author": "Nathan Kot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathankot/mongoose-big-decimal/issues"
+  },
+  "homepage": "https://github.com/nathankot/mongoose-big-decimal",
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "chai": "~1.8.1",
+    "mongoose": "~3.8.5"
+  }
+}
