@@ -1,6 +1,6 @@
 {
   "name": "mongoose-big-decimal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Adds the big decimal type to mongoose",
   "main": "index.js",
   "scripts": {
