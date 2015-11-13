@@ -20,7 +20,3 @@ mongoose.Schema({
   price: { type: mongoose.Schema.Types.BigDecimal }
 })
 ```
-
-## Big
-
-Uses the [Big.js](https://github.com/MikeMcl/big.js/) library.
