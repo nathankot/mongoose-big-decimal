@@ -1,9 +1,7 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-release');
+    grunt.loadNpmTasks('grunt-release');
 
 };
-
-
