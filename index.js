@@ -1,13 +1,13 @@
 'use strict';
 
+//dependencies
 var Big = require('big.js');
 
-module.exports = function BigDecimal(mongoose) {
+module.exports = function MongooseBigDecimal(mongoose) {
 
     var Schema = mongoose.Schema;
     var SchemaType = mongoose.SchemaType;
     var Types = mongoose.Types;
-    var mongo = mongoose.mongo;
 
 
     /**
@@ -20,7 +20,7 @@ module.exports = function BigDecimal(mongoose) {
      */
     function BigDecimal(key, options) {
         SchemaType.call(this, key, options);
-    };
+    }
 
     /*!
      * inherits
@@ -45,7 +45,7 @@ module.exports = function BigDecimal(mongoose) {
      * @param {Boolean} init
      * @return {Big|null}
      */
-    BigDecimal.prototype.cast = function(val, doc, init) {
+    BigDecimal.prototype.cast = function(val /*, doc , init*/ ) {
         try {
             return new Big(val);
         } catch (e) {}
@@ -59,7 +59,7 @@ module.exports = function BigDecimal(mongoose) {
      * @param {any} val
      * @param {Object} doc
      */
-    BigDecimal.prototype.applyGetters = function(val, doc) {
+    BigDecimal.prototype.applyGetters = function(val /*, doc*/ ) {
         return new Big(val);
     };
 

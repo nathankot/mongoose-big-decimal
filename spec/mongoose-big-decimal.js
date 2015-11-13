@@ -9,12 +9,12 @@ var Big = require('big.js');
 
 var BigDecimal = require('../index.js')(mongoose);
 
-var ProductSchema = Schema({
+var ProductSchema = new Schema({
     price: {
         type: BigDecimal,
         required: true
     }
-})
+});
 
 var Product = mongoose.model('Product', ProductSchema);
 
@@ -93,7 +93,7 @@ describe('Big Decimal Type', function() {
             var product = new Product({
                 price: 'not a number'
             });
-            product.save(function(err, product) {
+            product.save(function(err /*, product*/ ) {
                 expect(err.name).to.equal('CastError');
                 expect(err.type).to.equal('BigDecimal');
                 done();
@@ -102,8 +102,8 @@ describe('Big Decimal Type', function() {
 
         describe('required validation works', function(done) {
             var product = new Product();
-            product.save(function(err, product) {
-                expect(err.name).to.equal('ValidationError')
+            product.save(function(err /*, product*/ ) {
+                expect(err.name).to.equal('ValidationError');
                 done();
             });
         });
