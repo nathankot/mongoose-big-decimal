@@ -32,9 +32,9 @@
         "jshint-stylish": "^2.0.1",
         "lodash": "^3.10.1",
         "mocha": "^2.3.3",
-        "mongoose": "^4.2.5"
+        "mongoose": "^4.4.7"
     },
     "dependencies": {
-        "big.js": "^2.4.1"
+        "big.js": "^3.1.3"
     }
 }
