@@ -1,7 +1,7 @@
 'use strict';
 
 //dependencies
-
+var util = require('util');
 var BigDecimal = require('big.js');
 var mongoose = require('mongoose');
 var SchemaType = mongoose.SchemaType;
@@ -38,8 +38,7 @@ SchemaBigDecimal.schemaName = 'BigDecimal';
 /**
  * @description inherits from mongoose SchemaType
  */
-SchemaBigDecimal.prototype = Object.create(SchemaType.prototype);
-SchemaBigDecimal.prototype.constructor = BigDecimal;
+util.inherits(SchemaBigDecimal, mongoose.SchemaType);
 
 
 /**
