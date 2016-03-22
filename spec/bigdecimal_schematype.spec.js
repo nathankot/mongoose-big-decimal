@@ -10,6 +10,8 @@ require(path.join(__dirname, '..', 'index'));
 
 var Schema = mongoose.Schema;
 var Product;
+var Hardware;
+var Software;
 
 
 describe('BigDecimal Schema Type', function() {
@@ -163,14 +165,13 @@ describe('BigDecimal Schema Type', function() {
                 min: new BigDecimal(4)
             }
         });
-        var Hardware = mongoose.model('Hardware', HardwareSchema);
+        Hardware = mongoose.model('Hardware', HardwareSchema);
 
         var hammer = new Hardware();
-        hammer.price = new BigDecimal(2);
+        hammer.price = new BigDecimal(3.999999);
 
         hammer.validate(function(error) {
             expect(error).to.not.be.null;
-            expect(error.name).to.be.equal('ValidationError');
 
             expect(error.errors.price).to.exist;
             expect(error.errors.price.name).to.be.equal('ValidatorError');
@@ -179,6 +180,15 @@ describe('BigDecimal Schema Type', function() {
         });
     });
 
+    it('should allow to set the minimum allowed value', function(done) {
+        var hammer = new Hardware();
+        hammer.price = new BigDecimal(4);
+
+        hammer.validate(function(error) {
+            expect(error).to.be.undefined;
+            done();
+        });
+    });
 
     it('should be able to validate its maximum allowed value', function(done) {
         var SoftwareSchema = new Schema({
@@ -189,10 +199,10 @@ describe('BigDecimal Schema Type', function() {
                 max: new BigDecimal(4000)
             }
         });
-        var Software = mongoose.model('Software', SoftwareSchema);
+        Software = mongoose.model('Software', SoftwareSchema);
 
         var inventory = new Software();
-        inventory.price = new BigDecimal(6200);
+        inventory.price = new BigDecimal(4000.1);
 
         inventory.validate(function(error) {
 
@@ -202,6 +212,16 @@ describe('BigDecimal Schema Type', function() {
             expect(error.errors.price).to.exist;
             expect(error.errors.price.name).to.be.equal('ValidatorError');
             expect(error.errors.price.kind).to.be.equal('max');
+            done();
+        });
+    });
+
+    it('should allow to set the maximum allowed value', function(done) {
+        var inventory = new Software();
+        inventory.price = new BigDecimal(4000);
+
+        inventory.validate(function(error) {
+            expect(error).to.be.undefined;
             done();
         });
     });

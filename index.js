@@ -56,7 +56,7 @@ SchemaBigDecimal.prototype.checkRequired = function checkRequired(value) {
 
 /**
  * @function
- * @description sets a maximum bigdecimal validator
+ * @description sets a minimum bigdecimal validator
  * @param {BigDecimal} value minimum bigdecimal allowed
  * @param {String} [message] optional custom error message
  * @return {SchemaBigDecimal} this
@@ -76,7 +76,7 @@ SchemaBigDecimal.prototype.min = function(value, message) {
         msg = msg.replace(/{MIN}/, value);
 
         this.minValidator = function(v) {
-            return v !== null && v.gt(value);
+            return v !== null && v.gte(value);
         };
 
         this.validators.push({
@@ -112,7 +112,7 @@ SchemaBigDecimal.prototype.max = function(value, message) {
         msg = msg.replace(/{MAX}/, value);
 
         this.maxValidator = function(v) {
-            return v !== null && v.lt(value);
+            return v !== null && v.lte(value);
         };
 
         this.validators.push({
