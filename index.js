@@ -137,7 +137,7 @@ SchemaBigDecimal.prototype.max = function(value, message) {
 SchemaBigDecimal.prototype.cast = function(value /*,doc , init*/ ) {
 
     //is null
-    if (null === value) {
+    if (null === value || value === undefined) {
         return value;
     }
 
@@ -152,7 +152,7 @@ SchemaBigDecimal.prototype.cast = function(value /*,doc , init*/ ) {
     }
 
     //is number or string
-    if (value && (typeof value === 'string' || typeof value === 'number')) {
+    if (typeof value === 'string' || typeof value === 'number') {
         try {
             return new BigDecimal(value);
         } catch (e) {
