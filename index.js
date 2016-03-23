@@ -1,7 +1,7 @@
 'use strict';
 
 //dependencies
-
+var util = require('util');
 var BigDecimal = require('big.js');
 var mongoose = require('mongoose');
 var SchemaType = mongoose.SchemaType;
@@ -38,8 +38,7 @@ SchemaBigDecimal.schemaName = 'BigDecimal';
 /**
  * @description inherits from mongoose SchemaType
  */
-SchemaBigDecimal.prototype = Object.create(SchemaType.prototype);
-SchemaBigDecimal.prototype.constructor = BigDecimal;
+util.inherits(SchemaBigDecimal, mongoose.SchemaType);
 
 
 /**
@@ -57,7 +56,7 @@ SchemaBigDecimal.prototype.checkRequired = function checkRequired(value) {
 
 /**
  * @function
- * @description sets a maximum bigdecimal validator
+ * @description sets a minimum bigdecimal validator
  * @param {BigDecimal} value minimum bigdecimal allowed
  * @param {String} [message] optional custom error message
  * @return {SchemaBigDecimal} this
@@ -77,7 +76,7 @@ SchemaBigDecimal.prototype.min = function(value, message) {
         msg = msg.replace(/{MIN}/, value);
 
         this.minValidator = function(v) {
-            return v !== null && v.gt(value);
+            return v !== null && v.gte(value);
         };
 
         this.validators.push({
@@ -113,7 +112,7 @@ SchemaBigDecimal.prototype.max = function(value, message) {
         msg = msg.replace(/{MAX}/, value);
 
         this.maxValidator = function(v) {
-            return v !== null && v.lt(value);
+            return v !== null && v.lte(value);
         };
 
         this.validators.push({
@@ -138,7 +137,7 @@ SchemaBigDecimal.prototype.max = function(value, message) {
 SchemaBigDecimal.prototype.cast = function(value /*,doc , init*/ ) {
 
     //is null
-    if (null === value) {
+    if (null === value || value === undefined) {
         return value;
     }
 
@@ -153,7 +152,7 @@ SchemaBigDecimal.prototype.cast = function(value /*,doc , init*/ ) {
     }
 
     //is number or string
-    if (value && (typeof value === 'string' || typeof value === 'number')) {
+    if (typeof value === 'string' || typeof value === 'number') {
         try {
             return new BigDecimal(value);
         } catch (e) {
